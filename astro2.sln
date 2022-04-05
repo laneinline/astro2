@@ -5,6 +5,11 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "astro2", "astro2.vcxproj", "{467D14B8-A7BD-4879-8C6E-609C58D514C1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59FF3AA9-FABF-4BD9-A35D-E92659AADE7D}"
+	ProjectSection(SolutionItems) = preProject
+		FrameworkRelease_x64.dll = FrameworkRelease_x64.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

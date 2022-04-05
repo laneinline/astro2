@@ -2,6 +2,8 @@
 
 #include "Framework.h"
 
+
+
 /* Test Framework realization */
 class MyFramework : public Framework {
 
@@ -16,6 +18,11 @@ public:
 
 	virtual bool Init() {
 
+		//drawTestBackground();
+		//Sprite* mySprite = nullptr;
+		//mySprite = createSprite("data/big_asteroid.bmp");
+
+		
 		return true;
 	}
 
@@ -24,7 +31,12 @@ public:
 	}
 
 	virtual bool Tick() {
-        drawTestBackground();
+
+		drawTestBackground();
+		Sprite* mySprite = nullptr;
+		mySprite = createSprite("data/big_asteroid.png");
+		drawSprite(mySprite, 10, 10);
+   
 		return false;
 	}
 
@@ -50,5 +62,11 @@ public:
 
 int main(int argc, char *argv[])
 {
-	return run(new MyFramework);
+	
+
+	MyFramework myFramework;
+	//drawSprite(mySprite, 10, 10);
+	myFramework.Init();
+	//myFramework.Tick();
+	return run(&myFramework);
 }
