@@ -120,10 +120,14 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aster.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="SObj.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aster.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="SObj.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

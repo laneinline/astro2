@@ -18,9 +18,21 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Aster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SObj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SObj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 
 #include "Framework.h"
 #include <iostream>
+#include "Aster.h"
 
 
 
@@ -10,12 +11,19 @@ class MyFramework : public Framework {
 
 public:
 
-	Sprite* sShip = nullptr;
-	int posX = 100;
-	int	posY = 100;
+
+	
+	int asterQuant =10;
+
+	SObj sShip;
+
+	Aster asterSmall;
+	Aster asterBig;
 
 	int scrWidth;
 	int scrHeight;
+
+	
 
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen) 
@@ -27,19 +35,19 @@ public:
 
 	virtual bool Init() { //runs automatically  on create obj
 
-		drawTestBackground();
-		//Sprite* mySprite = nullptr;
-		//mySprite = createSprite("data/big_asteroid.bmp");
-
-
 		getScreenSize(scrWidth, scrHeight);
 		std::cout << " scrWidth " << scrWidth << " scrHeight " << scrHeight << std::endl; 
 
-		posX = scrWidth / 2;
-		posY = scrHeight / 2;
+		
+		sShip = SObj(scrWidth, scrHeight);
+		sShip.setSprite("data/spaceship.png");
+		
+		asterSmall = Aster(scrWidth, scrHeight);
+		asterSmall.setSprite("data/small_asteroid.png");
 
-		sShip = createSprite("data/spaceship.png");
-		std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
+		asterBig = Aster(scrWidth, scrHeight);
+		asterBig.setSprite("data/big_asteroid.png");
+
 
 		
 		return true;
@@ -49,15 +57,39 @@ public:
 
 	}
 
-	virtual bool Tick() {
+	void update() {
+		
+		asterSmall.addx( 3 );
+		asterSmall.addy( 3 );
+
+		asterBig.addx( 2 );
+		asterBig.addy( 1 );
+
+
+	}
+
+	void draw() {
 
 		drawTestBackground();
 
-		drawSprite(sShip, posX, posY);
+		drawSprite(sShip.getSprite(), sShip.x(), sShip.y());
+
+		drawSprite(asterSmall.getSprite(), asterSmall.x(), asterSmall.y());
 		
-		//int w, h;
-		//getScreenSize(w,h);
-		//std::cout << " w: " << w << " h: " << h << std::endl;
+		drawSprite(asterBig.getSprite(), asterBig.x(), asterBig.y());
+
+		
+	
+	}
+
+	virtual bool Tick() {
+
+		
+		update();
+		draw();
+		
+		
+		
 
 		return false;
 	}
@@ -85,16 +117,22 @@ public:
 	virtual void onKeyPressed(FRKey k) {
 		if (k == FRKey::UP) { 
 			std::cout << " Key " << " UP " << " is pressed" << std::endl; 
-			posY -= 25; 
-			std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
+			//posY -= 25; 
+			//std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
 		}
 		if (k == FRKey::DOWN) { 
 			std::cout << " Key " << " DOWN " << " is pressed" << std::endl; 
-			posY += 25; 
-			std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
+			//posY += 25; 
+			//std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
 		}
-		if (k == FRKey::LEFT) { std::cout << " Key " << " LEFT " << " is pressed" << std::endl; posX -= 25; }
-		if (k == FRKey::RIGHT) { std::cout << " Key " << " RIGHT " << " is pressed" << std::endl; posX += 25; }
+		if (k == FRKey::LEFT) {
+			std::cout << " Key " << " LEFT " << " is pressed" << std::endl;
+			//posX -= 25; 
+		}
+		if (k == FRKey::RIGHT) { 
+			std::cout << " Key " << " RIGHT " << " is pressed" << std::endl; 
+			//posX += 25; 
+		}
 	
 
 
