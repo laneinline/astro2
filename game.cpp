@@ -5,6 +5,7 @@
 #include "Aster.h"
 #include "Bullet.h"
 #include "Recticle.h"
+#include "SpaceShip.h"
 
 
 
@@ -19,7 +20,7 @@ public:
 
 	Recticle recticle;
 
-	SObj sShip;
+	SpaceShip sShip;
 
 	Bullet bullet;
 	
@@ -44,13 +45,10 @@ public:
 		std::cout << " scrWidth " << scrWidth << " scrHeight " << scrHeight << std::endl; 
 
 		recticle = Recticle(scrWidth,scrHeight);
-
+		showCursor(false);
 		
-		sShip = SObj(scrWidth, scrHeight);
-		sShip.setSprite("data/spaceship.png");
-		sShip.print();
-
-
+		sShip = SpaceShip(scrWidth, scrHeight);
+		//sShip.print();
 
 		bullet = Bullet(scrWidth,scrHeight);
 		

@@ -125,6 +125,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Recticle.cpp" />
     <ClCompile Include="SObj.cpp" />
+    <ClCompile Include="SpaceShip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aster.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Recticle.h" />
     <ClInclude Include="SObj.h" />
+    <ClInclude Include="SpaceShip.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
