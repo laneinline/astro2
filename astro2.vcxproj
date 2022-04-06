@@ -121,11 +121,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Aster.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="SObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aster.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="SObj.h" />
   </ItemGroup>

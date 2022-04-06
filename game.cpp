@@ -3,6 +3,7 @@
 #include "Framework.h"
 #include <iostream>
 #include "Aster.h"
+#include "Bullet.h"
 
 
 
@@ -17,6 +18,7 @@ public:
 
 	SObj sShip;
 
+	Bullet bullet;
 
 	Aster asterList[asterQuant];
 
@@ -42,11 +44,14 @@ public:
 		sShip = SObj(scrWidth, scrHeight);
 		sShip.setSprite("data/spaceship.png");
 		sShip.print();
+
+
+		bullet = Bullet(scrWidth,scrHeight);
+		
 		
 
 		for (int i = 0; i < asterQuant; i++) {
 			asterList[i] = Aster(scrWidth,scrHeight);
-			asterList[i].setSprite("data/big_asteroid.png");
 			asterList[i].setSpeed(2);
 			asterList[i].print();
 		}
@@ -65,6 +70,7 @@ public:
 		//asterSmall.move();
 
 		//asterBig.move();
+		bullet.move();
 
 		for (int i = 0; i < asterQuant; i++) {
 			asterList[i].move();
@@ -83,15 +89,12 @@ public:
 
 		drawSprite(sShip.getSprite(), sShip.x(), sShip.y());
 
-		//drawSprite(asterSmall.getSprite(), asterSmall.x(), asterSmall.y());
-		
-		//drawSprite(asterBig.getSprite(), asterBig.x(), asterBig.y());
-
 		for (int i = 0; i < asterQuant; i++) {
 			drawSprite(asterList[i].getSprite(), asterList[i].x(), asterList[i].y());
 
 		}
-		
+
+		drawSprite(bullet.getSprite(),bullet.x(),bullet.y());
 	
 	}
 
