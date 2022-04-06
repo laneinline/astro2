@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Aster.h"
 #include "Bullet.h"
+#include "Recticle.h"
 
 
 
@@ -16,10 +17,12 @@ public:
 	
 	static const int asterQuant =3;
 
+	Recticle recticle;
+
 	SObj sShip;
 
 	Bullet bullet;
-
+	
 	Aster asterList[asterQuant];
 
 	int scrWidth;
@@ -40,10 +43,13 @@ public:
 		getScreenSize(scrWidth, scrHeight);
 		std::cout << " scrWidth " << scrWidth << " scrHeight " << scrHeight << std::endl; 
 
+		recticle = Recticle(scrWidth,scrHeight);
+
 		
 		sShip = SObj(scrWidth, scrHeight);
 		sShip.setSprite("data/spaceship.png");
 		sShip.print();
+
 
 
 		bullet = Bullet(scrWidth,scrHeight);
@@ -95,7 +101,8 @@ public:
 		}
 
 		drawSprite(bullet.getSprite(),bullet.x(),bullet.y());
-	
+		
+		drawSprite(recticle.getSprite(), recticle.x(), recticle.y());
 	}
 
 	virtual bool Tick() {
@@ -111,8 +118,9 @@ public:
 	}
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) {
-		//std::cout << " Mouse " << " _ " << " moved" << std::endl;
-
+		//std::cout << " Mouse x: " << x << " y " << y << " moved" << std::endl;
+		recticle.setX(x);
+		recticle.setY(y);
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
