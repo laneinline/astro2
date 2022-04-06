@@ -112,7 +112,7 @@ bool SObj::isIntersect(int x, int y, int targetRadius)
         ) {
 
         intersect = true;
-        std::cout << " Collizionnn!!!";
+        //std::cout << " Collizionnn!!!";
     }
     else {
         intersect = false;

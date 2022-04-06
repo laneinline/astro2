@@ -19,6 +19,7 @@ public:
 
 	
 	static const int asterQuant = 10;
+	static const int bulletQuant = 10;
 
 	SObj background;
 
@@ -26,7 +27,7 @@ public:
 
 	SpaceShip sShip;
 
-	Bullet bullet;
+	std::vector <Bullet> bullets;
 	
 	std::vector <Aster> bigAsteroids;
 
@@ -56,13 +57,15 @@ public:
 		
 		sShip = SpaceShip(scrWidth, scrHeight);
 
-		bullet = Bullet(scrWidth,scrHeight);
+		for (int i = 0; i < bulletQuant; i++) {
+			bullets.push_back(Bullet(scrWidth, scrHeight));
+		}
+		
+		
 		
 		for (int i = 0; i < asterQuant; i++) {
 			bigAsteroids.push_back(Aster(scrWidth, scrHeight));
-			
 		}
-		std::cout << "vector of asteroid size " << bigAsteroids.size() << std::endl;
 
 		for (int i = 0; i < asterQuant; i++) {
 			bigAsteroids.at(i).setSpeed(2);
@@ -80,16 +83,26 @@ public:
 
 	void update() {
 		
+		for (int i = 0; i < bulletQuant;i++) {
+		
+			bullets[i].move();
+		}
 	
-		bullet.move();
+
 
 		for (int i = 0; i < asterQuant; i++) {
 			bigAsteroids[i].move();
 
 			sShip.isIntersect( bigAsteroids[i].getCenterX(), bigAsteroids[i].getCenterY(), bigAsteroids[i].getRadius() );
-			if (bullet.isIntersect(bigAsteroids[i].getCenterX(), bigAsteroids[i].getCenterY(), bigAsteroids[i].getRadius())) {
-				bigAsteroids[i].destroy();
+
+			for (int y = 0; y < bulletQuant; y++) {
+				if (bullets[y].exist() && bigAsteroids[i].exist() && bullets[y].isIntersect(bigAsteroids[i].getCenterX(), bigAsteroids[i].getCenterY(), bigAsteroids[i].getRadius())) {
+					bigAsteroids[i].destroy();
+					bullets[y].destroy();
+				}
+			
 			}
+			
 
 
 		}
@@ -111,12 +124,14 @@ public:
 			if (bigAsteroids[i].exist()) {
 				drawSprite(bigAsteroids[i].getSprite(), bigAsteroids[i].x(), bigAsteroids[i].y());
 			}
-			
-
 		}
 
-		drawSprite(bullet.getSprite(),bullet.x(),bullet.y());
-		
+		for (int i = 0; i < bulletQuant; i++) {
+			if (bullets[i].exist()) {
+				drawSprite(bullets[i].getSprite(), bullets[i].x(), bullets[i].y());
+			}
+		}
+
 		drawSprite(recticle.getSprite(), recticle.x(), recticle.y());
 	}
 
@@ -138,6 +153,16 @@ public:
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
 		if (button == FRMouseButton::LEFT && isReleased == true) {
 			std::cout << " LEFT " << " Mouse Button " << " is clicked" << std::endl;
+			for (int i = 0; i < bulletQuant; i++) {
+				if (bullets[i].exist() == false) {
+
+					bullets[i].shoot(sShip.x(), sShip.y(), recticle.x() + rand() % 10, recticle.y() + rand() % 10);
+					break;
+				}
+				//TODO respawn bullets
+			
+			}
+
 			
 		}		
 		if (button == FRMouseButton::MIDDLE && isReleased == true) {
