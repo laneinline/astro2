@@ -63,12 +63,22 @@ public:
 	}
 
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) {
-		std::cout << " Mouse " << " _ " << " moved" << std::endl;
+		//std::cout << " Mouse " << " _ " << " moved" << std::endl;
 
 	}
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
-		std::cout << " Mouse " << " Button " << " is clicked" << std::endl;
+		if (button == FRMouseButton::LEFT && isReleased == true) {
+			std::cout << " LEFT " << " Mouse Button " << " is clicked" << std::endl;
+			
+		}		
+		if (button == FRMouseButton::MIDDLE && isReleased == true) {
+			std::cout << " MIDDLE " << " Mouse Button " << " is clicked" << std::endl;
+		}		
+		if (button == FRMouseButton::RIGHT && isReleased == true) {
+			std::cout << " RIGHT " << " Mouse Button " << " is clicked" << std::endl;
+		}
+
 
 	}
 
