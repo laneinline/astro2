@@ -13,12 +13,12 @@ public:
 
 
 	
-	int asterQuant =10;
+	static const int asterQuant =3;
 
 	SObj sShip;
 
-	Aster asterSmall;
-	Aster asterBig;
+
+	Aster asterList[asterQuant];
 
 	int scrWidth;
 	int scrHeight;
@@ -41,12 +41,15 @@ public:
 		
 		sShip = SObj(scrWidth, scrHeight);
 		sShip.setSprite("data/spaceship.png");
+		sShip.print();
 		
-		asterSmall = Aster(scrWidth, scrHeight);
-		asterSmall.setSprite("data/small_asteroid.png");
 
-		asterBig = Aster(scrWidth, scrHeight);
-		asterBig.setSprite("data/big_asteroid.png");
+		for (int i = 0; i < asterQuant; i++) {
+			asterList[i] = Aster(scrWidth,scrHeight);
+			asterList[i].setSprite("data/big_asteroid.png");
+			asterList[i].setSpeed(2);
+			asterList[i].print();
+		}
 
 
 		
@@ -59,11 +62,17 @@ public:
 
 	void update() {
 		
-		asterSmall.addx( 3 );
-		asterSmall.addy( 3 );
+		//asterSmall.move();
 
-		asterBig.addx( 2 );
-		asterBig.addy( 1 );
+		//asterBig.move();
+
+		for (int i = 0; i < asterQuant; i++) {
+			asterList[i].move();
+
+			sShip.isIntersect( asterList[i].getCenterX(), asterList[i].getCenterY(), asterList[i].getRadius() );
+		}
+
+
 
 
 	}
@@ -74,10 +83,14 @@ public:
 
 		drawSprite(sShip.getSprite(), sShip.x(), sShip.y());
 
-		drawSprite(asterSmall.getSprite(), asterSmall.x(), asterSmall.y());
+		//drawSprite(asterSmall.getSprite(), asterSmall.x(), asterSmall.y());
 		
-		drawSprite(asterBig.getSprite(), asterBig.x(), asterBig.y());
+		//drawSprite(asterBig.getSprite(), asterBig.x(), asterBig.y());
 
+		for (int i = 0; i < asterQuant; i++) {
+			drawSprite(asterList[i].getSprite(), asterList[i].x(), asterList[i].y());
+
+		}
 		
 	
 	}
@@ -117,21 +130,23 @@ public:
 	virtual void onKeyPressed(FRKey k) {
 		if (k == FRKey::UP) { 
 			std::cout << " Key " << " UP " << " is pressed" << std::endl; 
-			//posY -= 25; 
-			//std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
+			sShip.addy(-25); 
+
+
 		}
 		if (k == FRKey::DOWN) { 
 			std::cout << " Key " << " DOWN " << " is pressed" << std::endl; 
-			//posY += 25; 
-			//std::cout << " sShip position X: " << posX << " Y: " << posY << std::endl;
+			sShip.addy(25);
+
+			
 		}
 		if (k == FRKey::LEFT) {
 			std::cout << " Key " << " LEFT " << " is pressed" << std::endl;
-			//posX -= 25; 
+			sShip.addx(-25);
 		}
 		if (k == FRKey::RIGHT) { 
 			std::cout << " Key " << " RIGHT " << " is pressed" << std::endl; 
-			//posX += 25; 
+			sShip.addx(+25);
 		}
 	
 
@@ -154,11 +169,7 @@ public:
 int main(int argc, char* argv[])
 {
 
-
 	MyFramework myFramework;
-	//drawSprite(mySprite, 10, 10);
-	//myFramework.Init();
-
 
 	return run(&myFramework);
 }
