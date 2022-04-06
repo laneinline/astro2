@@ -29,6 +29,11 @@ void SObj::setSprite(std::string path)
     sprite = createSprite(path.c_str());
 }
 
+bool SObj::exist()
+{
+    return isExists;
+}
+
 int SObj::x()
 {
     return posX;
@@ -52,6 +57,7 @@ void SObj::setSpeed(int spd)
 
 void SObj::move()
 {
+    //angle += 10;
     addx((int)(speed * cos(angle * 3.14159 / 180 )));
     addy((int)(speed * sin(angle * 3.14159 / 180)));
 }
@@ -59,14 +65,14 @@ void SObj::move()
 void SObj::addx(int pos)
 {
     posX += pos;
-    if (posX < 0) { posX = scrW; }
+    if (posX < 0) { posX = scrW-radius; }
     if (posX > scrW) { posX = 0; }
 }
 
 void SObj::addy(int pos)
 {
     posY += pos;
-    if (posY < 0) { posY = scrH; }
+    if (posY < 0) { posY = scrH -radius; }
     if (posY > scrH) { posY = 0; }
 }
 

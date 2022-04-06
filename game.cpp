@@ -2,10 +2,12 @@
 
 #include "Framework.h"
 #include <iostream>
+#include <vector>
 #include "Aster.h"
 #include "Bullet.h"
 #include "Recticle.h"
 #include "SpaceShip.h"
+
 
 
 
@@ -16,7 +18,9 @@ public:
 
 
 	
-	static const int asterQuant =3;
+	static const int asterQuant = 10;
+
+	SObj background;
 
 	Recticle recticle;
 
@@ -24,7 +28,7 @@ public:
 
 	Bullet bullet;
 	
-	Aster asterList[asterQuant];
+	std::vector <Aster> bigAsteroids;
 
 	int scrWidth;
 	int scrHeight;
@@ -44,20 +48,25 @@ public:
 		getScreenSize(scrWidth, scrHeight);
 		std::cout << " scrWidth " << scrWidth << " scrHeight " << scrHeight << std::endl; 
 
+		background = SObj(scrWidth,scrHeight);
+		background.setSprite("data/background.png");
+
 		recticle = Recticle(scrWidth,scrHeight);
 		showCursor(false);
 		
 		sShip = SpaceShip(scrWidth, scrHeight);
-		//sShip.print();
 
 		bullet = Bullet(scrWidth,scrHeight);
 		
-		
+		for (int i = 0; i < asterQuant; i++) {
+			bigAsteroids.push_back(Aster(scrWidth, scrHeight));
+			
+		}
+		std::cout << "vector of asteroid size " << bigAsteroids.size() << std::endl;
 
 		for (int i = 0; i < asterQuant; i++) {
-			asterList[i] = Aster(scrWidth,scrHeight);
-			asterList[i].setSpeed(2);
-			asterList[i].print();
+			bigAsteroids.at(i).setSpeed(2);
+			bigAsteroids[i].print();
 		}
 
 
@@ -71,15 +80,18 @@ public:
 
 	void update() {
 		
-		//asterSmall.move();
-
-		//asterBig.move();
+	
 		bullet.move();
 
 		for (int i = 0; i < asterQuant; i++) {
-			asterList[i].move();
+			bigAsteroids[i].move();
 
-			sShip.isIntersect( asterList[i].getCenterX(), asterList[i].getCenterY(), asterList[i].getRadius() );
+			sShip.isIntersect( bigAsteroids[i].getCenterX(), bigAsteroids[i].getCenterY(), bigAsteroids[i].getRadius() );
+			if (bullet.isIntersect(bigAsteroids[i].getCenterX(), bigAsteroids[i].getCenterY(), bigAsteroids[i].getRadius())) {
+				bigAsteroids[i].destroy();
+			}
+
+
 		}
 
 
@@ -91,10 +103,15 @@ public:
 
 		drawTestBackground();
 
+		drawSprite(background.getSprite(),0,0);//TODO tile background with sprites
+
 		drawSprite(sShip.getSprite(), sShip.x(), sShip.y());
 
 		for (int i = 0; i < asterQuant; i++) {
-			drawSprite(asterList[i].getSprite(), asterList[i].x(), asterList[i].y());
+			if (bigAsteroids[i].exist()) {
+				drawSprite(bigAsteroids[i].getSprite(), bigAsteroids[i].x(), bigAsteroids[i].y());
+			}
+			
 
 		}
 
@@ -108,9 +125,6 @@ public:
 		
 		update();
 		draw();
-		
-		
-		
 
 		return false;
 	}

@@ -12,6 +12,8 @@ public:
 	Sprite* getSprite();
 	void setSprite(std::string path);
 
+	bool exist();
+
 	int x();
 	int y();
 	int s();

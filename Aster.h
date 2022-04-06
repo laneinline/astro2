@@ -7,6 +7,8 @@ public:
 	Aster();
 	Aster(int scrWidth,int scrHeight);
 	
+	void destroy();
+	void create();
 
 
 
