@@ -55,7 +55,7 @@ protected:
 	int centrY = 11;
 	int radius = 11;
 
-	int scrW;
-	int scrH;
+	int scrW = 0;
+	int scrH = 0;
 };
 

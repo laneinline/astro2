@@ -7,7 +7,9 @@
 #include "Bullet.h"
 #include "Recticle.h"
 #include "SpaceShip.h"
+#include "Camera.h"
 
+//TODO moving camera
 
 
 
@@ -22,8 +24,9 @@ public:
 	int lag=0;
 	int milliscePerUpdate = 17;
 	int resetTime = 0;
+	int everyHalfSecond = 0;
 
-	int isMousebuttonPressed = 0; // test for mouse clicking 
+	int isMousebuttonPressed = 0; // test for mouse clicking d
 
 	static const int asterQuant = 10;
 	static const int bulletQuant = 20;
@@ -38,24 +41,29 @@ public:
 	
 	std::vector <Aster> bigAsteroids;
 
-	int scrWidth;
-	int scrHeight;
+	int scrWidth =800;
+	int scrHeight =600;
 
-	
+	Camera camera;
 
 
 	virtual void PreInit(int& width, int& height, bool& fullscreen) 
-	{
+	{	
+		//width = camera.w;
 		width = 800;
 		//width = 1280;
+		
+		//height = camera.h;
 		height =600;
 		//height = 720;
 		fullscreen = false;
+
+
 	}
 
 	virtual bool Init() { //runs automatically  on create obj
 
-		getScreenSize(scrWidth, scrHeight);
+		//getScreenSize(scrWidth, scrHeight);
 		std::cout << " scrWidth " << scrWidth << " scrHeight " << scrHeight << std::endl; 
 
 		background = SObj(scrWidth,scrHeight);
@@ -93,6 +101,8 @@ public:
 
 	void update() {
 		
+		sShip.move();
+
 		for (int i = 0; i < bulletQuant;i++) {
 		
 			bullets[i].move();
@@ -148,10 +158,11 @@ public:
 
 	void draw() {
 
+		
 
 		tileBackground();
 
-		drawSprite(background.getSprite(),0,0);
+		//drawSprite(background.getSprite(),0,0);
 
 		drawSprite(sShip.getSprite(), sShip.x(), sShip.y());
 
@@ -177,6 +188,7 @@ public:
 		elapsed = currentTime - previousTime; // how much in mseconds takes 1 cycle
 		lag += elapsed; // store how many cycles*mseconds i want skip
 		resetTime += elapsed;
+		everyHalfSecond += elapsed;
 
 		while (lag >= milliscePerUpdate) //reverse time 
 		{
@@ -188,6 +200,11 @@ public:
 		draw();
 		
 		respawnAsteroids();
+
+		if (everyHalfSecond > 500) {
+			if(sShip.s() >0) sShip.setSpeed( sShip.s() -1);
+			everyHalfSecond = 0;
+		}
 
 
 		return false;
@@ -221,23 +238,27 @@ public:
 	virtual void onKeyPressed(FRKey k) {
 		if (k == FRKey::UP) { 
 			std::cout << " Key " << " UP " << " is pressed" << std::endl; 
-			sShip.addy(-25); 
+			sShip.setAngle(270);
+			sShip.setSpeed(4);
 
 
 		}
 		if (k == FRKey::DOWN) { 
 			std::cout << " Key " << " DOWN " << " is pressed" << std::endl; 
-			sShip.addy(25);
+			sShip.setAngle(90);
+			sShip.setSpeed(4);
 
 			
 		}
 		if (k == FRKey::LEFT) {
 			std::cout << " Key " << " LEFT " << " is pressed" << std::endl;
-			sShip.addx(-25);
+			sShip.setAngle(180);
+			sShip.setSpeed(4);
 		}
 		if (k == FRKey::RIGHT) { 
 			std::cout << " Key " << " RIGHT " << " is pressed" << std::endl; 
-			sShip.addx(+25);
+			sShip.setAngle(0);
+			sShip.setSpeed(4);
 		}
 	
 

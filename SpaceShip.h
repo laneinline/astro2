@@ -6,5 +6,6 @@ class SpaceShip :
 public: 
     SpaceShip();
     SpaceShip(int scrWidth, int scrHeight);
+    void setAngle(int ang);
 };
 

@@ -138,6 +138,7 @@ XCOPY "$(SolutionDir)data" "$(OutDir)data\" /S /Y</Command>
   <ItemGroup>
     <ClCompile Include="Aster.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Recticle.cpp" />
     <ClCompile Include="SObj.cpp" />
@@ -146,6 +147,7 @@ XCOPY "$(SolutionDir)data" "$(OutDir)data\" /S /Y</Command>
   <ItemGroup>
     <ClInclude Include="Aster.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Recticle.h" />
     <ClInclude Include="SObj.h" />
