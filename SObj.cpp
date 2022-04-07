@@ -70,7 +70,8 @@ void SObj::setSpeed(int spd)
 
 void SObj::move()
 {
-    //angle += 10;
+    // object moves  1 pixel or 0  on low speeds
+    // 0.xxx path part stored for next tick()
     movedistX += speed * cos(angle * 3.14159 / 180);
     movedistY += speed * sin(angle * 3.14159 / 180);
 
@@ -80,9 +81,7 @@ void SObj::move()
     movedistX -= (int)movedistX;
     movedistY -= (int)movedistY;
 
-    //std::cout << "MovedistX : " << movedistX << " modedistY " << movedistY << std::endl;
-    //addx((int)(speed * cos(angle * 3.14159 / 180 )));
-    //addy((int)(speed * sin(angle * 3.14159 / 180)));
+
 }
 
 void SObj::addx(int pos)

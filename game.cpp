@@ -16,6 +16,11 @@ class MyFramework : public Framework {
 
 public:
 
+	int currentTime = 0;
+	int previousTime = 0;
+	int elapsed = 0;
+	int lag=0;
+	int milliscePerUpdate = 17;
 
 	
 	static const int asterQuant = 10;
@@ -138,9 +143,23 @@ public:
 
 	virtual bool Tick() {
 
-		
-		update();
+		previousTime = currentTime;
+		currentTime = getTickCount();
+		elapsed = currentTime - previousTime; // how much in mseconds takes 1 cycle
+		lag += elapsed; // store how many cycles*mseconds i want skip
+
+		while (lag >= milliscePerUpdate) //reverse time 
+		{
+
+			update();
+			lag -= milliscePerUpdate;
+		}
+
+
+
+	
 		draw();
+		
 
 		return false;
 	}
