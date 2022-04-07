@@ -26,7 +26,7 @@ public:
 	int isMousebuttonPressed = 0; // test for mouse clicking 
 
 	static const int asterQuant = 10;
-	static const int bulletQuant = 5;
+	static const int bulletQuant = 20;
 
 	SObj background;
 
@@ -77,6 +77,7 @@ public:
 		for (int i = 0; i < asterQuant; i++) {
 			bigAsteroids.at(i).setSpeed(2);
 			bigAsteroids[i].print();
+			bigAsteroids[i].spawn(sShip.x(),sShip.y());
 		}
 
 
