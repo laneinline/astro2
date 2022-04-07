@@ -77,7 +77,7 @@ public:
 		}
 
 		for (int i = 0; i < asterQuant; i++) {
-			bigAsteroids.at(i).setSpeed(501);//if speed > screensize fix error 
+			bigAsteroids.at(i).setSpeed(2);//if speed > screensize fix error 
 			bigAsteroids[i].print();
 			bigAsteroids[i].spawn(sShip.x(),sShip.y());
 		}
