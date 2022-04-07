@@ -84,6 +84,12 @@ void SObj::move()
 
 }
 
+void SObj::reverseAngle()
+{
+    angle *= -1;
+
+}
+
 void SObj::addx(int pos)
 {
     posX += pos;

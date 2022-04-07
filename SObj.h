@@ -22,6 +22,7 @@ public:
 	
 	void setSpeed(int spd);
 	void move();
+	void reverseAngle();
 	void addx(int pos );
 	void addy(int pos );
 

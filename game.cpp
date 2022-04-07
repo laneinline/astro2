@@ -23,9 +23,10 @@ public:
 	int milliscePerUpdate = 17;
 	int resetTime = 0;
 
-	
-	static const int asterQuant = 30;
-	static const int bulletQuant = 50;
+	int isMousebuttonPressed = 0; // test for mouse clicking 
+
+	static const int asterQuant = 10;
+	static const int bulletQuant = 5;
 
 	SObj background;
 
@@ -97,7 +98,20 @@ public:
 
 
 		for (int i = 0; i < asterQuant; i++) {
+			
+
 			bigAsteroids[i].move();
+
+			for (int j = 0; j < asterQuant; j++) {
+				if (j != i 
+					&& bigAsteroids[i].isIntersect(bigAsteroids[j].getCenterX(), bigAsteroids[j].getCenterY(), bigAsteroids[j].getRadius())
+					&& bigAsteroids[i].exist() && bigAsteroids[j].exist()
+					) {
+					bigAsteroids[i].reverseAngle();
+					bigAsteroids[j].reverseAngle();
+				}
+			
+			}
 
 			sShip.isIntersect( bigAsteroids[i].getCenterX(), bigAsteroids[i].getCenterY(), bigAsteroids[i].getRadius() );
 
@@ -111,6 +125,17 @@ public:
 			
 
 
+		}
+
+		if (isMousebuttonPressed > 0) {
+			for (int i = 0; i < bulletQuant; i++) {
+				if (bullets[i].exist() == false) {
+					bullets[i].shoot(sShip.x(), sShip.y(), recticle.x(), recticle.y());
+					break;
+				}
+				//TODO respawn bullets
+			}
+			isMousebuttonPressed = 0; //simple event simulation 
 		}
 
 
@@ -174,21 +199,16 @@ public:
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) {
 		if (button == FRMouseButton::LEFT && isReleased == true) {
-			std::cout << " LEFT " << " Mouse Button " << " is clicked" << std::endl;
-			for (int i = 0; i < bulletQuant; i++) {
-				if (bullets[i].exist() == false) {
-					bullets[i].shoot(sShip.x(), sShip.y(), recticle.x() , recticle.y() );
-					break;
-				}
-				//TODO respawn bullets
-			
-			}
+			//std::cout << " LEFT " << " Mouse Button " << " is clicked" << std::endl;
+			isMousebuttonPressed = 1;
 
-			
-		}		
+		} // endof released	
+
+
 		if (button == FRMouseButton::MIDDLE && isReleased == true) {
 			std::cout << " MIDDLE " << " Mouse Button " << " is clicked" << std::endl;
 		}		
+
 		if (button == FRMouseButton::RIGHT && isReleased == true) {
 			std::cout << " RIGHT " << " Mouse Button " << " is clicked" << std::endl;
 		}
