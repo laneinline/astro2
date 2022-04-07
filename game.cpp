@@ -21,10 +21,11 @@ public:
 	int elapsed = 0;
 	int lag=0;
 	int milliscePerUpdate = 17;
+	int resetTime = 0;
 
 	
-	static const int asterQuant = 10;
-	static const int bulletQuant = 10;
+	static const int asterQuant = 30;
+	static const int bulletQuant = 50;
 
 	SObj background;
 
@@ -147,6 +148,7 @@ public:
 		currentTime = getTickCount();
 		elapsed = currentTime - previousTime; // how much in mseconds takes 1 cycle
 		lag += elapsed; // store how many cycles*mseconds i want skip
+		resetTime += elapsed;
 
 		while (lag >= milliscePerUpdate) //reverse time 
 		{
@@ -155,11 +157,11 @@ public:
 			lag -= milliscePerUpdate;
 		}
 
-
-
-	
 		draw();
 		
+		respawnAsteroids();
+
+
 
 		return false;
 	}
@@ -175,8 +177,7 @@ public:
 			std::cout << " LEFT " << " Mouse Button " << " is clicked" << std::endl;
 			for (int i = 0; i < bulletQuant; i++) {
 				if (bullets[i].exist() == false) {
-
-					bullets[i].shoot(sShip.x(), sShip.y(), recticle.x() + rand() % 10, recticle.y() + rand() % 10);
+					bullets[i].shoot(sShip.x(), sShip.y(), recticle.x() , recticle.y() );
 					break;
 				}
 				//TODO respawn bullets
@@ -247,6 +248,22 @@ public:
 	
 	}
 
+	void respawnAsteroids() {
+
+		if (resetTime > 5000) {
+
+			for (int i = 0; i < asterQuant; i++) {
+				if (!bigAsteroids[i].exist()) {
+					
+					
+					
+					bigAsteroids[i].spawn(sShip.x(),sShip.y());
+
+				}
+			}
+			resetTime = 0;
+		}
+	}
 
 
 };

@@ -9,6 +9,7 @@ public:
 	
 	void destroy();
 	void create();
+	void spawn(int targetX, int targetY );
 
 
 

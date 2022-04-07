@@ -20,6 +20,7 @@ void Bullet::shoot(int x, int y, int mouseX, int mouseY)
 	posX = x;
 	posY = y;
 	isExists = true;
+	//std::cout << "bullet posX " << posX << " posY " << posY << std::endl;
 	//std::cout << " mouseX-x " << mouseX - x << " mouseY - y " <<  mouseY - y << std::endl;
 	angle = -1*((atan2(mouseX-x,mouseY-y) *180/3.14159) -90); // 응응응응응응응응응응응응응응응응응응응응응� 
 	//std::cout << "atan2(mouseX-x,mouseY-y) " << atan2(mouseX - x, mouseY - y) << " angle " << angle << std::endl;
