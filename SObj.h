@@ -16,6 +16,8 @@ public:
 
 	int x();
 	int y();
+	int w();
+	int h();
 	int s();
 	
 	void setSpeed(int spd);

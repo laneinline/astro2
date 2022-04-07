@@ -114,9 +114,10 @@ public:
 
 	void draw() {
 
-		drawTestBackground();
 
-		drawSprite(background.getSprite(),0,0);//TODO tile background with sprites
+		tileBackground();
+
+		drawSprite(background.getSprite(),0,0);
 
 		drawSprite(sShip.getSprite(), sShip.x(), sShip.y());
 
@@ -210,6 +211,23 @@ public:
 	{
 		return "asteroids";
 	}
+
+	void tileBackground() {
+		int tilesW;
+		int tilesH;
+
+		tilesW = scrWidth / background.w();
+		tilesH = scrHeight / background.h();
+		
+		for (int i = 0; i < tilesW +1; i++) { //+1 to cower half tile on screen 
+			for (int j = 0; j < tilesH +1; j++) {
+				drawSprite(background.getSprite(), i * background.w(), j * background.h());
+			
+			}
+		}
+	
+	}
+
 
 
 };

@@ -27,6 +27,8 @@ Sprite* SObj::getSprite()
 void SObj::setSprite(std::string path)
 {
     sprite = createSprite(path.c_str());
+    getSpriteSize(sprite, width, height);
+    radius = width / 2;//reset values
 }
 
 bool SObj::exist()
@@ -42,6 +44,17 @@ int SObj::x()
 int SObj::y()
 {
     return posY;
+}
+
+int SObj::w()
+{
+
+    return width;
+}
+
+int SObj::h()
+{
+    return height;
 }
 
 int SObj::s()
