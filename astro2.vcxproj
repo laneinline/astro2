@@ -86,6 +86,10 @@
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /d /y "$(ProjectDir)*.dll" "$(OutDir)"
+XCOPY "$(SolutionDir)data" "$(OutDir)data\" /S /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -102,6 +106,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>FrameworkRelease_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /d /y "$(ProjectDir)*.dll" "$(OutDir)"
+XCOPY "$(SolutionDir)data" "$(OutDir)data\" /S /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
@@ -110,6 +118,10 @@
     <ClCompile>
       <PreprocessorDefinitions>DLL_EXPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /d /y "$(ProjectDir)*.dll" "$(OutDir)"
+XCOPY "$(SolutionDir)data" "$(OutDir)data\" /S /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
@@ -118,6 +130,10 @@
     <ClCompile>
       <PreprocessorDefinitions>DLL_EXPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /d /y "$(ProjectDir)*.dll" "$(OutDir)"
+XCOPY "$(SolutionDir)data" "$(OutDir)data\" /S /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Aster.cpp" />

@@ -47,7 +47,9 @@ public:
 	virtual void PreInit(int& width, int& height, bool& fullscreen) 
 	{
 		width = 800;
+		//width = 1280;
 		height =600;
+		//height = 720;
 		fullscreen = false;
 	}
 
@@ -75,7 +77,7 @@ public:
 		}
 
 		for (int i = 0; i < asterQuant; i++) {
-			bigAsteroids.at(i).setSpeed(2);
+			bigAsteroids.at(i).setSpeed(501);//if speed > screensize fix error 
 			bigAsteroids[i].print();
 			bigAsteroids[i].spawn(sShip.x(),sShip.y());
 		}
@@ -186,7 +188,6 @@ public:
 		draw();
 		
 		respawnAsteroids();
-
 
 
 		return false;

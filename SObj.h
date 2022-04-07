@@ -42,9 +42,9 @@ protected:
 
 
 	int speed = 0;
-	int angle = rand()%360;
-	float movedistX; 
-	float movedistY; 
+	int angle = 0;
+	float movedistX =0; 
+	float movedistY =0; 
 
 	int posX = 10 ;
 	int posY = 10 ;

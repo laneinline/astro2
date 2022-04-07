@@ -15,7 +15,7 @@ SObj::SObj(int scrWidth, int scrHeight)
     getSpriteSize(getSprite(), width, height);
 
     radius = width / 2;
-
+    angle = rand() % 359;
     //std::cout << " SObj(int scrWidth, int scrHeight) constructor " << std::endl;
 }
 
@@ -74,6 +74,7 @@ void SObj::move()
     // 0.xxx path part stored for next tick()
     movedistX += speed * cos(angle * 3.14159 / 180);
     movedistY += speed * sin(angle * 3.14159 / 180);
+
 
     addx((int)movedistX);
     addy((int)movedistY);
@@ -154,7 +155,8 @@ void SObj::print()
     std::cout << "SObj " << " posX: " << posX << " posY: " << posY
         << " scrW: " << scrW << " scrH: " << scrH
         << " Speed: " << speed << " Angle: " << angle
-        << " center X: " << getCenterX() << " center Y : " << getCenterY()
+        << " movedistX: " << movedistX << " movedistY: " << movedistY
+        //<< " center X: " << getCenterX() << " center Y: " << getCenterY()
         << " radius: " << getRadius()
         << std::endl;
 }
