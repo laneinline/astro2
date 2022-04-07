@@ -71,8 +71,18 @@ void SObj::setSpeed(int spd)
 void SObj::move()
 {
     //angle += 10;
-    addx((int)(speed * cos(angle * 3.14159 / 180 )));
-    addy((int)(speed * sin(angle * 3.14159 / 180)));
+    movedistX += speed * cos(angle * 3.14159 / 180);
+    movedistY += speed * sin(angle * 3.14159 / 180);
+
+    addx((int)movedistX);
+    addy((int)movedistY);
+
+    movedistX -= (int)movedistX;
+    movedistY -= (int)movedistY;
+
+    //std::cout << "MovedistX : " << movedistX << " modedistY " << movedistY << std::endl;
+    //addx((int)(speed * cos(angle * 3.14159 / 180 )));
+    //addy((int)(speed * sin(angle * 3.14159 / 180)));
 }
 
 void SObj::addx(int pos)

@@ -37,12 +37,13 @@ protected:
 
 	bool isExists;
 
-
 	Sprite* sprite;
 
 
 	int speed = 0;
 	int angle = rand()%360;
+	float movedistX; 
+	float movedistY; 
 
 	int posX = 10 ;
 	int posY = 10 ;
